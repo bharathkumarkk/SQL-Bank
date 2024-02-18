@@ -1,0 +1,13 @@
+/* YOUR QUERY GOES HERE
+   Example: SELECT * FROM EMPLOYEE; 
+*/
+SELECT
+    CONCAT (e.first_name," ",e.last_name) AS full_name
+FROM employees e
+INNER JOIN (SELECT
+                e1.manager_id,
+                COUNT(*) AS count_of_emp
+            FROM employees e1
+            GROUP BY e1.manager_id
+            HAVING count_of_emp >= 4) AS sub
+ON e.employee_id=sub.manager_id;
