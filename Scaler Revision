@@ -1,6 +1,10 @@
-/* YOUR QUERY GOES HERE
-   Example: SELECT * FROM EMPLOYEE; 
-*/
+/*Problem Statement:
+Write a query to display the "full_name" (first name and last name separated by space) of a manager who manages 4 or more employees.
+Note:
+Return the result ordered by full_name in ascending order.
+The column manager_id in the employees table represents the employee_id of the manager*/
+
+
 SELECT
     CONCAT (e.first_name," ",e.last_name) AS full_name
 FROM employees e
