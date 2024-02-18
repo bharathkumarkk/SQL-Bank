@@ -1,4 +1,6 @@
-/*Problem Statement:
+/* 1...
+
+Problem Statement:
 Write a query to display the "full_name" (first name and last name separated by space) of a manager who manages 4 or more employees.
 Note:
 Return the result ordered by full_name in ascending order.
@@ -15,3 +17,47 @@ INNER JOIN (SELECT
             GROUP BY e1.manager_id
             HAVING count_of_emp >= 4) AS sub
 ON e.employee_id=sub.manager_id;
+
+
+
+
+/* 2...
+
+Problem Statement
+
+Display the details of those departments where the salary of each employee in that department is at least 9000.
+
+Return all the columns from the departments table.
+Return the result ordered by department_id in ascending order.
+*/
+
+
+SELECT *
+FROM departments
+WHERE department_id IN
+                    (SELECT department_id
+                    FROM employees
+                    GROUP BY department_id
+                    HAVING MIN(salary)>=9000);
+
+
+
+
+
+/* 3...
+
+Problem Statement:
+
+Display all the country names where the average salary provided for the employees of that country is greater than 8000.
+
+Return the column 'country_name'.
+Use the tables employees, departments, locations, and countries.
+*/
+
+SELECT c.country_name
+FROM employees e
+JOIN departments d ON e.department_id=d.department_id
+JOIN locations l ON d.location_id=l.location_id
+JOIN countries c ON l.country_id=c.country_id
+GROUP BY c.country_name
+HAVING AVG(e.salary)>8000;
